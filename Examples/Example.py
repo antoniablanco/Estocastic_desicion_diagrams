@@ -12,8 +12,8 @@ from ExampleProblem import ProblemKnapsack
 from Exceptions.MyExceptions import SameLenError
 
 # Valores construcción knapsack
-matrix_of_wheight = [[3, 3, 4, 6]]
-right_side_of_restrictions = [10]
+matrix_of_wheight = [3, 3, 4, 6]
+right_side_of_restrictions = 5
 
 # Valores construcción abstract problem
 initial_state = [0]

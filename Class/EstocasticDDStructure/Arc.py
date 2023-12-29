@@ -4,7 +4,7 @@ class Arc():
     Clase que representa una estructura de los arcos. 
     '''
 
-    def __init__(self, out_node, in_node, variable_value, variable_id):
+    def __init__(self, out_node, in_node, variable_value, variable_id, probability):
         '''
         Constructor de la clase Arc.
 
@@ -18,7 +18,7 @@ class Arc():
         self._in_node = in_node
         self._variable_value = variable_value
         self._variable_id = variable_id
-        self._probability = 0
+        self._probability = probability
         self.id = self.__str__()
     
     def __str__(self) -> str:
@@ -26,7 +26,7 @@ class Arc():
         Retorna:
         str: Representación de cadena del objeto Arc.
         '''
-        return "arc_" + str(self.out_node.id_node) + "_" + str(self.in_node.id_node)
+        return "arc_" + str(self.out_node.id_node) + "_" + str(self.in_node.id_node) + " "+str(self.probability)+"%"
     
     '''
     Los siguientes métodos son getters y setters de los atributos de la clase Arc.
