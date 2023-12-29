@@ -147,7 +147,7 @@ class GraphFile:
             self.file.write(f"\tsource {arc.out_node.id_node}\n")
 
     def _add_arc_label(self, arc: Arc) -> None:
-        self.file.write(f"\tlabel \"{arc.variable_value}, {arc.probability}\"\n")
+        self.file.write(f"\tlabel \"{arc.probability}\"\n")
 
     def _add_arc_target(self, arc: Arc) -> None:
         if arc.in_node.id_node == 't':
@@ -156,7 +156,8 @@ class GraphFile:
             self.file.write(f"\ttarget {arc.in_node.id_node}\n")
 
     def _add_arc_graphics(self, arc: Arc) -> None:
-        self.file.write("\tgraphics [\n")
+        self.file.write("\tgraphics\n")
+        self.file.write("\t[\n")
 
         if self.is_graph_binary:
             self._add_binary_arc_graphics(arc)
@@ -164,18 +165,18 @@ class GraphFile:
         else:
             self._add_normal_arc_graphics(arc)
 
-        self.file.write(f"]")
+        self.file.write(f"    ]\n")
 
 
     def _add_normal_arc_graphics(self, arc: Arc) -> None:
-        self.file.write(f"\tfill \"#000000\" 		targetArrow \"standard\"	 	 \n")
+        self.file.write(f"\tfill \"#808080\" 		targetArrow \"standard\"	 	 \n")
 
 
     def _add_binary_arc_graphics(self, arc: Arc) -> None:
         if arc.variable_value == 0:
             self.file.write(f"\tfill \"#808080\" 		targetArrow \"standard\"	 style	\"dashed\"	 \n")
         else:
-            self.file.write(f"\tfill \"#000000\" 		targetArrow \"diamond\"	 	 \n")
+            self.file.write(f"\tfill \"#808080\" 		targetArrow \"diamond\"	 	 \n")
     
     def _end_file(self):
         '''

@@ -57,7 +57,7 @@ class Print():
                 self._domain.append(arc.variable_value)
 
             style = self.add_edge_style_to_graph(arc.variable_value)
-            self._G.add_edge(arc.out_node.id_node, arc.in_node.id_node, style=style, label=f"{arc.variable_value}, {arc.probability}")
+            self._G.add_edge(arc.out_node.id_node, arc.in_node.id_node, style=style, label=f"{arc.probability}")
     
     def add_edge_style_to_graph(self, arc_variable_value: int):
         '''
@@ -103,9 +103,53 @@ class Print():
         Parámetros:
         - pos: Diccionario que mapea nodos a posiciones en el grafo visualizado.
         '''
+        edge_labels = {}
+        parallels_arcs = self._get_total_parallel_arcs()
+        last_nodes_visited = [0, 0]
+        actual_parallel_arc_ctd = 1
         for u, v, data in self._G.edges(data=True):
+            if u == last_nodes_visited[0] and v == last_nodes_visited[1]:
+                actual_parallel_arc_ctd += 1
+            else:
+                actual_parallel_arc_ctd = 1
+            last_nodes_visited = [u,v]
+
             style = data.get("style", "solid")
-            nx.draw_networkx_edges(self._G, pos, edgelist=[(u, v)], style=style)
+            arc_rad = self._get_rad_for_arc(parallels_arcs[(u, v)], actual_parallel_arc_ctd)
+            nx.draw_networkx_edges(self._G, pos=pos, edgelist=[(u, v)], style=style, connectionstyle=f'arc3, rad = {arc_rad}', arrows=True)
+            edge_labels[(u, v)] = f"{data['label']}"
+        
+        nx.draw_networkx_edge_labels(self._G, pos, edge_labels=edge_labels, font_color='red', 
+        rotate=False,label_pos=0.7, horizontalalignment= 'right')
+    
+    def _get_total_parallel_arcs(self):
+        '''
+        Calcula la cantidad de arcos paralelos que hay en el grafo visualizado.
+
+        Retorna:
+        int: Cantidad de arcos paralelos.
+        '''
+        parallel_arcs = {}
+        for u, v, data in self._G.edges(data=True):
+            parallel_arcs[(u, v)] = parallel_arcs.get((u, v), 0) + 1
+        
+        return parallel_arcs
+    
+    def _get_rad_for_arc(self, total_arcs, current_arc):
+        '''
+        Calcula el radio de un arco en el grafo visualizado.
+
+        Parámetros:
+        - total_arcs: Cantidad total de arcos en el grafo visualizado.
+        - current_arc: Arco actual.
+
+        Retorna:
+        float: Radio del arco.
+        '''
+        if total_arcs == 1:
+            return 0
+
+        return (0.4/(total_arcs-1))*(current_arc-1) - 0.20
     
     def _add_nodes_to_graph(self, pos: int):
         '''

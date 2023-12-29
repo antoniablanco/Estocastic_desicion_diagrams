@@ -276,289 +276,361 @@ graph [
 edge [
 	source 0
 	target 1
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 0
 	target 2
-	label "1, 0.5"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.5"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 0
 	target 3
-	label "1, 0.5"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.5"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 1
 	target 4
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 1
 	target 5
-	label "1, 0.3"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.3"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 1
 	target 6
-	label "1, 0.7"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.7"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 2
 	target 7
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 2
 	target 6
-	label "1, 0.3"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.3"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 2
 	target 8
-	label "1, 0.7"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.7"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 3
 	target 5
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 3
 	target 8
-	label "1, 0.3"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.3"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 3
 	target 9
-	label "1, 0.7"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.7"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 4
 	target 10
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 4
 	target 11
-	label "1, 0.4"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.4"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 4
 	target 12
-	label "1, 0.6"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.6"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 5
 	target 13
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 5
 	target 14
-	label "1, 0.4"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.4"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 6
 	target 14
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 6
 	target 12
-	label "1, 0.4"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.4"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 7
 	target 11
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 7
 	target 13
-	label "1, 0.4"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.4"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 7
 	target 15
-	label "1, 0.6"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.6"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 8
 	target 12
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 8
 	target 15
-	label "1, 0.4"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.4"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 9
 	target 15
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 10
 	target 16
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 10
 	target 16
-	label "1, 0.9"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.9"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 10
 	target 16
-	label "1, 0.1"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.1"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 11
 	target 16
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 11
 	target 16
-	label "1, 0.9"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.9"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 11
 	target 16
-	label "1, 0.1"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.1"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 12
 	target 16
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 13
 	target 16
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 13
 	target 16
-	label "1, 0.9"
-	graphics [
-	fill "#000000" 		targetArrow "diamond"	 	 
-]]
+	label "0.9"
+	graphics
+	[
+	fill "#808080" 		targetArrow "diamond"	 	 
+    ]
+]
 
 edge [
 	source 14
 	target 16
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 edge [
 	source 15
 	target 16
-	label "0, 1"
-	graphics [
+	label "1"
+	graphics
+	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
-]]
+    ]
+]
 
 ]
