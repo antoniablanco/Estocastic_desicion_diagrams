@@ -56,7 +56,7 @@ class Graph():
         for arc1 in node1.in_arcs:
             there_is_equal_arc = False
             for arc2 in node2.in_arcs:
-                if arc1.variable_value == arc2.variable_value and arc1.out_node.state == arc2.out_node.state:
+                if arc1.variable_value == arc2.variable_value and arc1.out_node.state == arc2.out_node.state and arc1.probability == arc2.probability:
                     there_is_equal_arc = True
             devolver_in_arcs = devolver_in_arcs and there_is_equal_arc
         
@@ -64,7 +64,7 @@ class Graph():
         for arc1 in node1.out_arcs:
             there_is_equal_arc = False
             for arc2 in node2.out_arcs:
-                if arc1.variable_value == arc2.variable_value and arc1.in_node.state == arc2.in_node.state:
+                if arc1.variable_value == arc2.variable_value and arc1.in_node.state == arc2.in_node.state and arc1.probability == arc2.probability:
                     there_is_equal_arc = True
             devolver_out_arcs = devolver_out_arcs and there_is_equal_arc
 
