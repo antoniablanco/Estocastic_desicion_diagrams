@@ -1,5 +1,6 @@
 import networkx as nx
 import matplotlib.pyplot as plt
+import numpy as np
 
 from Class.EstocasticDDStructure.Graph import Graph
 from Class.EstocasticDDStructure.Node import Node
@@ -118,7 +119,7 @@ class Print():
             arc_rad = self._get_rad_for_arc(parallels_arcs[(u, v)], actual_parallel_arc_ctd)
             nx.draw_networkx_edges(self._G, pos=pos, edgelist=[(u, v)], style=style, connectionstyle=f'arc3, rad = {arc_rad}', arrows=True)
             edge_labels[(u, v)] = f"{data['label']}"
-        
+
         nx.draw_networkx_edge_labels(self._G, pos, edge_labels=edge_labels, font_color='red', 
         rotate=False,label_pos=0.7, horizontalalignment= 'right')
     

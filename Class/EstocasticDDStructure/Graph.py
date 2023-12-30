@@ -32,7 +32,6 @@ class Graph():
         if not isinstance(other, Graph):
             return False
         
-        
         devolver = True
         for i, layer in enumerate(self.structure):
 
