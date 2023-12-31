@@ -15,11 +15,13 @@ from Exceptions.MyExceptions import SameLenError
 
 class ProblemKnapsack(AbstractProblem):
 
-    def __init__(self, initial_state, variables, list_of_wheight_for_restrictions, right_side_of_restrictions):
+    def __init__(self, initial_state, variables, 
+    list_of_wheight_for_restrictions, right_side_of_restrictions, values):
         super().__init__(initial_state, variables)
 
         self.list_of_wheight_for_restrictions = list_of_wheight_for_restrictions
         self.right_side_of_restrictions = right_side_of_restrictions
+        self.values = values
 
         self.check_atributes(variables, initial_state)
 
@@ -53,14 +55,4 @@ class ProblemKnapsack(AbstractProblem):
         return states
     
     def _probabilistic_function(self, variable_id, variable_value):
-        values = [
-            {1: 0.5, 2: 0.5},
-            {2: 0.3, 3: 0.7},
-            {1: 0.4, 4: 0.6},
-            {3: 0.9, 4: 0.1} 
-        ]
-
-        if int(variable_value) == 0:
-            return {0: 1}
-
-        return values[int(variable_id[2:])-1]
+        return self.values[int(variable_value)][int(variable_id[2:])-1]

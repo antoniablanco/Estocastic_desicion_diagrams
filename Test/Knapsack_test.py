@@ -26,11 +26,12 @@ class ProblemKnapsackTest(unittest.TestCase):
     def setUp(self):
         class ProblemKnapsack(AbstractProblem):
 
-            def __init__(self, initial_state, variables, list_of_wheight_for_restrictions, right_side_of_restrictions):
+            def __init__(self, initial_state, variables, list_of_wheight_for_restrictions, right_side_of_restrictions, values):
                 super().__init__(initial_state, variables)
 
                 self.list_of_wheight_for_restrictions = list_of_wheight_for_restrictions
                 self.right_side_of_restrictions = right_side_of_restrictions
+                self.values = values
 
             def equals(self, state_one, state_two):
                 return state_one == state_two
@@ -50,23 +51,26 @@ class ProblemKnapsackTest(unittest.TestCase):
                 return states
             
             def _probabilistic_function(self, variable_id, variable_value):
-                values = [
-                    {1: 0.5, 2: 0.5},
-                    {2: 0.3, 3: 0.7},
-                    {1: 0.4, 4: 0.6},
-                    {3: 0.9, 4: 0.1} 
-                ]
-
-                if int(variable_value) == 0:
-                    return {0: 1}
-
-                return values[int(variable_id[2:])-1]
+                return values[int(variable_value)][int(variable_id[2:])-1]
         
         matrix_of_wheight = [3, 3, 4, 6]
         right_side_of_restrictions = 5
+        values = {
+                    0 : [
+                        {0:1},
+                        {0:1},
+                        {0:1},
+                        {0:1}],
+                    1 : [
+                        {1: 0.5, 2: 0.5},
+                        {2: 0.3, 3: 0.7},
+                        {1: 0.4, 4: 0.6},
+                        {3: 0.9, 4: 0.1} ]
+                        }
+
         initial_state = [0]
         variables = [('x_1', [0, 1]), ('x_2', [0, 1]), ('x_3', [0, 1]), ('x_4', [0, 1])]
-        self.problem_instance = ProblemKnapsack(initial_state, variables, matrix_of_wheight, right_side_of_restrictions)
+        self.problem_instance = ProblemKnapsack(initial_state, variables, matrix_of_wheight, right_side_of_restrictions, values)
         self.dd_instance = EstocasticDD(self.problem_instance, verbose=False)
 
     def test_ordered_variables(self):
