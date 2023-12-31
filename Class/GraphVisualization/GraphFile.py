@@ -178,7 +178,7 @@ class GraphFile:
         else:
             self.file.write(f"\tfill \"#808080\" 		targetArrow \"diamond\"	 	 \n")
     
-    def _end_file(self):
+    def _end_file(self) -> None:
         '''
         Finaliza la estructura del archivo GML.
         '''

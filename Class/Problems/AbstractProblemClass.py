@@ -11,7 +11,7 @@ class AbstractProblem(ABC):
     en initial_state.
     '''
 
-    def __init__(self, initial_state, variables):
+    def __init__(self, initial_state, variables, values):
         '''
         Constructor de la clase AbstractProblem.
 
@@ -20,6 +20,7 @@ class AbstractProblem(ABC):
         string, etc. Según lo que se requiera para el problema.
         - variables (list<tuple<variable, dominio>>): Una lista de tuplas que contiene las
         variables del problema y su dominio.
+        - values (dict): Un diccionario que mapea variables a sus posibles valores con sus probabilidades
 
         Atributos:
         - initial_state (NOT DEFINE): El estado inicial del problema. *LEER IMPORTANTE.
@@ -29,8 +30,12 @@ class AbstractProblem(ABC):
         self.initial_state = initial_state
         self.ordered_variables = self._get_variables(variables)
         self.variables_domain = dict(variables)
+        self.values = values
     
     def _get_variables(self, variablesAndDomain):
+        ''' 
+        Obtiene una lista de variables ordenadas las cuales se obtienen del parametro variables.
+        '''
         ordered_variables = []
         for var in variablesAndDomain:
             ordered_variables.append(var[0])
@@ -67,15 +72,17 @@ class AbstractProblem(ABC):
         '''
         raise NotImplementedError("The method transition_function has not been implemented yet")
 
+    @abstractmethod
+    def _probabilistic_function(self, variable_id, variable_value):
         '''
-        Método abstracto que debe ser implementado por las subclases para definir un nuevo estado, cuando dos nodos 
-        sean juntados.
+        Método abstracto que debe ser implementado por las subclases para definir la función probabilistica.
 
         Parámetros:
-        state_one: El primer estado a fusionar. *LEER IMPORTANTE
-        state_two: El segundo estado a fusionar. *LEER IMPORTANTE
+        variable_id: El identificador de la variable que se modifica, sigue el mismo type que el entregado en 
+        variables.
+        variable_value: El valor de la variable que se modifica, es el valor posible de su dominio que se selecciono.
 
         Retorna:
-        El estado resultante de la fusión.
+        dict: Un diccionario que mapea los valores posibles de la variable a su probabilidad.
         '''
-        raise NotImplementedError("The method merge_operator has not been implemented yet")
+        raise NotImplementedError("The method _probabilistic_function has not been implemented yet")

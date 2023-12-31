@@ -27,11 +27,10 @@ class ProblemKnapsackTest(unittest.TestCase):
         class ProblemKnapsack(AbstractProblem):
 
             def __init__(self, initial_state, variables, list_of_wheight_for_restrictions, right_side_of_restrictions, values):
-                super().__init__(initial_state, variables)
+                super().__init__(initial_state, variables, values)
 
                 self.list_of_wheight_for_restrictions = list_of_wheight_for_restrictions
                 self.right_side_of_restrictions = right_side_of_restrictions
-                self.values = values
 
             def equals(self, state_one, state_two):
                 return state_one == state_two

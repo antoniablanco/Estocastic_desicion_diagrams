@@ -97,7 +97,7 @@ class Print():
 
         return pos
     
-    def _add_edges_to_graph(self, pos):
+    def _add_edges_to_graph(self, pos: dict):
         '''
         Agrega arcos al grafo visualizado.
 
@@ -136,7 +136,7 @@ class Print():
         
         return parallel_arcs
     
-    def _get_rad_for_arc(self, total_arcs, current_arc):
+    def _get_rad_for_arc(self, total_arcs: int, current_arc: int):
         '''
         Calcula el radio de un arco en el grafo visualizado.
 
@@ -152,7 +152,7 @@ class Print():
 
         return (0.4/(total_arcs-1))*(current_arc-1) - 0.20
     
-    def _add_nodes_to_graph(self, pos: int):
+    def _add_nodes_to_graph(self, pos: dict):
         '''
         Agrega nodos al grafo visualizado.
 
