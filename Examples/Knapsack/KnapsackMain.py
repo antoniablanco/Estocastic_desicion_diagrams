@@ -17,15 +17,15 @@ from Exceptions.MyExceptions import SameLenError
 matrix_of_wheight = [[3, 3, 4, 6]]
 right_side_of_restrictions = [5]
 values = {
-            0 : [{0:1},
-                 {0:1},
-                 {0:1},
-                 {0:1}],
+            0 : {'x_1': {0:1},
+                 'x_2': {0:1},
+                 'x_3': {0:1},
+                 'x_4': {0:1}},
 
-            1 : [{1: 0.5, 2: 0.5},
-                 {2: 0.3, 3: 0.7},
-                 {1: 0.4, 4: 0.6},
-                 {3: 0.9, 4: 0.1} ]
+            1 : {'x_1': {1: 0.5, 2: 0.5},
+                 'x_2': {2: 0.3, 3: 0.7},
+                 'x_3': {1: 0.4, 4: 0.6},
+                 'x_4': {3: 0.9, 4: 0.1} }
                 }
 
 # Valores construcción abstract problem

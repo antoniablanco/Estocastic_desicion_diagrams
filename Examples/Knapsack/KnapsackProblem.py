@@ -40,7 +40,7 @@ class ProblemKnapsack(AbstractProblem):
         return state_one == state_two
 
     def transition_function(self, previus_state, variable_id, variable_value):
-        states = []
+        statesList = []
         state_options = self._probabilistic_function(variable_id, variable_value)
 
         for state_option in state_options.keys():
@@ -49,9 +49,9 @@ class ProblemKnapsack(AbstractProblem):
             probability = state_options[state_option]
             
             state_answer = StateAnswer([new_state], isFeasible, probability)
-            states.append(state_answer)
+            statesList.append(state_answer)
 
-        return states
+        return statesList
     
     def _probabilistic_function(self, variable_id, variable_value):
-        return self.values[int(variable_value)][int(variable_id[2:])-1]
+        return self.values[int(variable_value)][variable_id]
