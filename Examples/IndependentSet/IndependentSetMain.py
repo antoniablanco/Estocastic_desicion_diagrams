@@ -21,7 +21,7 @@ variables = [('x_1', [0, 1]), ('x_2', [0, 1]), ('x_3', [0, 1]), ('x_4', [0, 1]),
 
 problem_instance = ProblemIndependentSet(initial_state, variables, DictVecinos)
 
-dd_instance = EstocasticDD(problem_instance, verbose=False)
+dd_instance = EstocasticDD(problem_instance, verbose=True)
 dd_instance.print_decision_diagram()
 
 dd_instance.export_graph_file("estocastic_file")

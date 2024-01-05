@@ -125,7 +125,7 @@ class ProblemKnapsackTest(unittest.TestCase):
         dd_instance = EstocasticDD(self.problem_instance, verbose=False)
         dd_instance.export_graph_file('estocastic_test')
 
-        expected_file_path = os.path.join('Test', 'gml_files', 'estocastic_test.gml')
+        expected_file_path = os.path.join('Test', 'gml_files', 'EstocasticKnapsackTest.gml')
         actual_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'estocastic_test.gml'))
 
         self.assertTrue(os.path.exists(actual_file_path))
