@@ -20,6 +20,7 @@ class AbstractProblem(ABC):
         string, etc. Según lo que se requiera para el problema.
         - variables (list<tuple<variable, dominio>>): Una lista de tuplas que contiene las
         variables del problema y su dominio.
+        - values (dict): Un diccionario que mapea variables a sus posibles valores con sus probabilidades
 
         Atributos:
         - initial_state (NOT DEFINE): El estado inicial del problema. *LEER IMPORTANTE.
@@ -31,6 +32,9 @@ class AbstractProblem(ABC):
         self.variables_domain = dict(variables)
     
     def _get_variables(self, variablesAndDomain):
+        ''' 
+        Obtiene una lista de variables ordenadas las cuales se obtienen del parametro variables.
+        '''
         ordered_variables = []
         for var in variablesAndDomain:
             ordered_variables.append(var[0])
@@ -66,16 +70,3 @@ class AbstractProblem(ABC):
         isFeasible, que es True si el estado es factible, y False en caso contrario.
         '''
         raise NotImplementedError("The method transition_function has not been implemented yet")
-
-        '''
-        Método abstracto que debe ser implementado por las subclases para definir un nuevo estado, cuando dos nodos 
-        sean juntados.
-
-        Parámetros:
-        state_one: El primer estado a fusionar. *LEER IMPORTANTE
-        state_two: El segundo estado a fusionar. *LEER IMPORTANTE
-
-        Retorna:
-        El estado resultante de la fusión.
-        '''
-        raise NotImplementedError("The method merge_operator has not been implemented yet")

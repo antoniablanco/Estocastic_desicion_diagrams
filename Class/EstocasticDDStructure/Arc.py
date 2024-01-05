@@ -14,12 +14,11 @@ class Arc():
         - variable_value(int): Valor de la variable asociada al arco.
         - variable_id(string): Identificador único de la variable asociada al arco.
         '''
-        self._out_node = out_node
-        self._in_node = in_node
-        self._variable_value = variable_value
-        self._variable_id = variable_id
-        self._probability = probability
-        self.id = self.__str__()
+        self.out_node = out_node
+        self.in_node = in_node
+        self.variable_value = variable_value
+        self.variable_id = variable_id
+        self.probability = probability
     
     def __str__(self) -> str:
         '''
@@ -28,53 +27,4 @@ class Arc():
         '''
         return "arc_" + str(self.out_node.id_node) + "_" + str(self.in_node.id_node) + " "+str(self.probability)+"%"
     
-    '''
-    Los siguientes métodos son getters y setters de los atributos de la clase Arc.
-    '''
-    @property
-    def out_node(self):
-        return self._out_node
-
-    @out_node.setter
-    def out_node(self, value):
-        self._out_node = value
-
-    @property
-    def in_node(self):
-        return self._in_node
-
-    @in_node.setter
-    def in_node(self, value):
-        self._in_node = value
-
-    @property
-    def transicion_value(self):
-        return self._transicion_value
-
-    @transicion_value.setter
-    def transicion_value(self, value):
-        self._transicion_value = value
-
-    @property
-    def variable_value(self):
-        return self._variable_value
-
-    @variable_value.setter
-    def variable_value(self, value):
-        self._variable_value = value
-
-    @property
-    def variable_id(self):
-        return self._variable_id
-
-    @variable_id.setter
-    def variable_id(self, value):
-        self._variable_id = value
     
-    @property
-    def probability(self):
-        return self._probability
-
-    @probability.setter
-    def probability(self, value):
-        self._probability = value

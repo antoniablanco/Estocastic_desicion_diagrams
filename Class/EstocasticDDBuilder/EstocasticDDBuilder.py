@@ -1,16 +1,17 @@
 from Class.EstocasticDDStructure.Node import Node
 from Class.EstocasticDDStructure.Arc import Arc
 from Class.EstocasticDDStructure.Graph import Graph
+from Class.Problems.AbstractProblemClass import AbstractProblem
 
 
 class EstocasticDDBuilder():
     '''
-    Clase abstracta que entrega el código base para la construcción de diagramas de decisión.
+    Clase que entrega el código base para la construcción de diagramas de decisión estocástico.
     '''
 
-    def __init__(self, problem):
+    def __init__(self, problem: AbstractProblem):
         '''
-        Constructor de la clase abstracta.
+        Constructor de los diagramas estocásticos.
 
         Parámetros:
         - problem: Objeto tipo problema para el cual se construirá el grafo.
@@ -34,7 +35,7 @@ class EstocasticDDBuilder():
         node_root = Node(0, initial_state)
         self.graph = Graph(node_root)
     
-    def get_decision_diagram(self, should_visualize):
+    def get_decision_diagram(self, should_visualize: bool) -> Graph:
         '''
         Retorna el grafo de decisión construido.
 
@@ -50,7 +51,7 @@ class EstocasticDDBuilder():
 
         return self.graph
 
-    def _create_new_layer(self, variable_id):
+    def _create_new_layer(self, variable_id: int):
         '''
         Crea una nueva capa en el grafo para una variable dada.
 
@@ -60,7 +61,7 @@ class EstocasticDDBuilder():
         self.graph.new_layer()
         self._create_new_nodes_in_the_new_layer(variable_id)
 
-    def _create_new_nodes_in_the_new_layer(self, variable_id):
+    def _create_new_nodes_in_the_new_layer(self, variable_id: int):
         '''
         Crea nodos en la nueva capa del grafo.
 
@@ -71,9 +72,9 @@ class EstocasticDDBuilder():
             for variable_value in self._variables_domain[self._variables[variable_id]]:
                 self._check_if_new_node_should_be_created(variable_value, existed_node, variable_id)
     
-    def _check_if_new_node_should_be_created(self, variable_value, existed_node, variable_id):
+    def _check_if_new_node_should_be_created(self, variable_value: int, existed_node: Node, variable_id: int):
         '''
-        Verifica si debe crearse un nuevo nodo en la capa actual.
+        Lleva a cabo la creación de arcos y nodos si es necesario
 
         Parámetros:
         - variable_value: Valor de la variable para la cual se verifica la creación del nuevo nodo.
@@ -89,7 +90,7 @@ class EstocasticDDBuilder():
                 else:
                     self._create_rest_of_arcs(existed_node, variable_value, variable_id, posible_state.value, posible_state.probability)
         
-    def _there_is_node_in_last_layer(self, variable_id):
+    def _there_is_node_in_last_layer(self, variable_id: int) -> bool:
         '''
         Verifica si hay nodos en la última capa del grafo.
 
@@ -101,7 +102,7 @@ class EstocasticDDBuilder():
         '''
         return self._variables[-1] == self._variables[variable_id] and self.graph.structure[-1] != []
     
-    def _create_arcs_for_the_terminal_node(self, existed_node, variable_value, variable_id, probability):
+    def _create_arcs_for_the_terminal_node(self, existed_node: Node, variable_value: int, variable_id: int, probability: int):
         '''
         Crea arcos para el nodo terminal en la última capa.
 
@@ -110,10 +111,11 @@ class EstocasticDDBuilder():
         - variable_value: Valor de la variable para la cual se crean los arcos.
         - variable_id: Índice de la variable para la cual se crean los arcos.
         '''
+
         same_state_node = self.graph.structure[-1][-1]
-        self._create_arc_for_the_new_node(existed_node, same_state_node, variable_value, variable_id, probability)
+        self._create_arc_for_node(existed_node, same_state_node, variable_value, variable_id, probability)
     
-    def _create_rest_of_arcs(self, existed_node, variable_value, variable_id, node_state, probability):
+    def _create_rest_of_arcs(self, existed_node: Node, variable_value: int, variable_id: int, node_state, probability: int):
         '''
         Crea los arcos para un nodo que no se encuentra en la última capa.
 
@@ -125,14 +127,11 @@ class EstocasticDDBuilder():
         '''
         exist_node, same_state_node = self._exist_node_with_same_state(node_state)
         if exist_node:
-            self._create_arc_for_the_new_node(existed_node, same_state_node, variable_value, variable_id, probability)
+            self._create_arc_for_node(existed_node, same_state_node, variable_value, variable_id, probability)
         else:
-            node_created = Node(str(self._node_number), node_state)
-            self._node_number += 1    
-            self._create_arc_for_the_new_node(existed_node, node_created, variable_value, variable_id, probability)
-            self.graph.add_node(node_created)
+            self._create_new_node_and_arc(existed_node, variable_value, variable_id, node_state, probability)
 
-    def _exist_node_with_same_state(self, node_state):
+    def _exist_node_with_same_state(self, node_state) -> tuple:
         '''
         Verifica si existe un nodo con el mismo estado en la misma capa.
 
@@ -147,7 +146,22 @@ class EstocasticDDBuilder():
                 return True, node
         return False, None
 
-    def _create_arc_for_the_new_node(self, existed_node, node_created, variable_value, variable_id, probability):
+    def _create_new_node_and_arc(self, existed_node: Node, variable_value: int, variable_id: int, node_state, probability: int):
+        '''
+        Crea un nuevo nodo y un arco para un nodo ya existente.
+
+        Parámetros:
+        - existed_node: Nodo existente en la capa anterior.
+        - variable_value: Valor de la variable para la cual se crea el arco.
+        - variable_id: Índice de la variable para la cual se crea el arco.
+        - node_state: Estado del nuevo nodo.
+        '''
+        node_created = Node(str(self._node_number), node_state)
+        self._node_number += 1
+        self._create_arc_for_node(existed_node, node_created, variable_value, variable_id, probability)
+        self.graph.add_node(node_created)
+
+    def _create_arc_for_node(self, out_node: Node, in_node: Node, variable_value: int, variable_id: int, probability: int):
         '''
         Crea un arco para un nodo ya existente.
 
@@ -157,11 +171,11 @@ class EstocasticDDBuilder():
         - variable_value: Valor de la variable para la cual se crea el arco.
         - variable_id: Índice de la variable para la cual se crea el arco.
         '''
-        arc = Arc(existed_node, node_created, variable_value, self._variables[variable_id], probability)
-        existed_node.add_out_arc(arc)
-        node_created.add_in_arc(arc)
+        arc = Arc(out_node, in_node, variable_value, self._variables[variable_id], probability)
+        out_node.add_out_arc(arc)
+        in_node.add_in_arc(arc)
 
-    def _print_graph(self, should_visualize):
+    def _print_graph(self, should_visualize: bool):
         '''
         Imprime el grafo si se solicita la visualización.
 

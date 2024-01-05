@@ -37,7 +37,7 @@ class ProblemKnapsackTest(unittest.TestCase):
                 return state_one == state_two
 
             def transition_function(self, previus_state, variable_id, variable_value):
-                states = []
+                statesList = []
                 state_options = self._probabilistic_function(variable_id, variable_value)
 
                 for state_option in state_options.keys():
@@ -46,27 +46,26 @@ class ProblemKnapsackTest(unittest.TestCase):
                     probability = state_options[state_option]
                     
                     state_answer = StateAnswer([new_state], isFeasible, probability)
-                    states.append(state_answer)
+                    statesList.append(state_answer)
 
-                return states
+                return statesList
             
             def _probabilistic_function(self, variable_id, variable_value):
-                return values[int(variable_value)][int(variable_id[2:])-1]
+                return values[int(variable_value)][variable_id]
         
         matrix_of_wheight = [3, 3, 4, 6]
         right_side_of_restrictions = 5
         values = {
-                    0 : [
-                        {0:1},
-                        {0:1},
-                        {0:1},
-                        {0:1}],
-                    1 : [
-                        {1: 0.5, 2: 0.5},
-                        {2: 0.3, 3: 0.7},
-                        {1: 0.4, 4: 0.6},
-                        {3: 0.9, 4: 0.1} ]
-                        }
+            0 : {'x_1': {0:1},
+                 'x_2': {0:1},
+                 'x_3': {0:1},
+                 'x_4': {0:1}},
+
+            1 : {'x_1': {1: 0.5, 2: 0.5},
+                 'x_2': {2: 0.3, 3: 0.7},
+                 'x_3': {1: 0.4, 4: 0.6},
+                 'x_4': {3: 0.9, 4: 0.1} }
+                }
 
         initial_state = [0]
         variables = [('x_1', [0, 1]), ('x_2', [0, 1]), ('x_3', [0, 1]), ('x_4', [0, 1])]
@@ -127,7 +126,7 @@ class ProblemKnapsackTest(unittest.TestCase):
         dd_instance = EstocasticDD(self.problem_instance, verbose=False)
         dd_instance.export_graph_file('estocastic_test')
 
-        expected_file_path = os.path.join('Test', 'gml_files', 'estocastic_test.gml')
+        expected_file_path = os.path.join('Test', 'gml_files', 'EstocasticKnapsackTest.gml')
         actual_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'estocastic_test.gml'))
 
         self.assertTrue(os.path.exists(actual_file_path))
