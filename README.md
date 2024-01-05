@@ -22,7 +22,6 @@ First should proceed to the construction of a **Problem** class, which must inhe
 
 * **equals:** Takes two states as input and should give as output a boolean value indicating whether they are equal or not.
 * **transition_function:** Takes as inputs a previous state, a variable identifier (e.g., "x_2"), and the domain this variable takes (e.g., "1"). It outputs a new state and a boolean value indicating whether the state is feasible or not.
-* **_probabilistic_function**: Based on the ID of a variable and its associated value, a dictionary is provided where each key represents a possible state, and the corresponding value is its probability of occurrence.
 
 Once this class is built, it is essential to create an instance of it to be passed to the "EstocasticDD" class. In this, you'll find functions to create, reduce and visualize a diagram, as well as obtain a copy of it.
 
@@ -50,7 +49,7 @@ To obtain a copy of the **EstocasticDD** instance without it being a pointer to 
 
 #### Get the Time of the Algoritms
 
-If it's want to get the time taken by the algorithms for creating the diagram or another of its forms, you need to use the *get_estocasticDDBuilder_time()* or *get_zzz_constructor_time()* methods of the **EstocasticDD** class, where zzz represent the type of graph that its wnated, for example reduce. 
+If it's want to get the time taken by the algorithms for creating the diagram or another of its forms, you need to use the *get_estocasticDDBuilder_time()* or *get_zzz_constructor_time()* methods of the **EstocasticDD** class, where zzz represent the type of graph that its wnated, for example reduce.
 
 ## Examples
 
