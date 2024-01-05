@@ -12,7 +12,7 @@ from Exceptions.MyExceptions import SameVariables, MustBeIntegers, ConsistentDic
 class ProblemIndependentSet(AbstractProblem):
 
     def __init__(self, initial_state, variables, dict_node_neighbors):
-        super().__init__(initial_state, variables, dict_node_neighbors)
+        super().__init__(initial_state, variables)
         self.dict_node_neighbors = dict_node_neighbors
 
         self.check_atributes(variables)
@@ -46,57 +46,53 @@ class ProblemIndependentSet(AbstractProblem):
         if int(variable_value) == 0 and int(variable_id[2:]) in previus_state:
             new_state = previus_state.copy()
             new_state.remove(int(variable_id[2:]))
-            state_answer = StateAnswer(new_state, True, 1)
-            statesList.append(state_answer)
+            statesList.append(StateAnswer(new_state, True, 1))
             
         elif int(variable_value) == 0 and int(variable_id[2:]) not in previus_state:
-            state_answer = StateAnswer(previus_state.copy(), True, 1)
-            statesList.append(state_answer)
+            statesList.append(StateAnswer(previus_state.copy(), True, 1))
 
         elif int(variable_value) == 1 and int(variable_id[2:]) in previus_state:
-            static_state = previus_state.copy()
-            static_state.remove(int(variable_id[2:]))
-            possible_neighbors = []
-
-            neighbors = self._probabilistic_function(variable_id)
-            for key in neighbors.keys():
-                if key in static_state:
-                    static_state.remove(key)
-                    possible_neighbors.append(key)
-
-            for bitset in range(1<<len(possible_neighbors)):
-                new_state = static_state.copy()
-                probability = 1
-                isFeasible = True
-                for i in range(len(possible_neighbors)):
-                    if bitset & (1<<i):
-                        if neighbors[possible_neighbors[i]] == 0: 
-                            isFeasible = False
-                            probability = 0
-                        else:
-                            probability *= neighbors[possible_neighbors[i]]
-                    else:
-                        new_state.append(possible_neighbors[i])
-                        if neighbors[possible_neighbors[i]] == 1: 
-                            isFeasible = False
-                            probability = 0
-                        else:
-                            probability *= (1 - neighbors[possible_neighbors[i]])
-
-                probability = round(probability, 3)
-                new_state.sort()
-                state_answer = StateAnswer(new_state, isFeasible, probability)
-                statesList.append(state_answer)
+            statesList = self._get_list_states_with_probabilities(previus_state, variable_id)
 
         elif int(variable_value) == 1 and int(variable_id[2:]) not in previus_state:
-            state_answer = StateAnswer(previus_state.copy(), False, 0)
-            statesList.append(state_answer)
-
-        else:
-            print("Caso borde: ", previus_state, variable_id, variable_value)
-
+            statesList.append(StateAnswer(previus_state.copy(), False, 0))
 
         return statesList
     
-    def _probabilistic_function(self, variable_id):
-        return self.values[variable_id]
+    def _get_list_states_with_probabilities(self, previus_state, variable_id):
+        statesList = []
+        static_state = previus_state.copy()
+        static_state.remove(int(variable_id[2:]))
+        possible_neighbors = []
+
+        neighbors = self.dict_node_neighbors[variable_id]
+        for key in neighbors.keys():
+            if key in static_state:
+                static_state.remove(key)
+                possible_neighbors.append(key)
+
+        for bitset in range(1<<len(possible_neighbors)):
+            new_state = static_state.copy()
+            probability = 1
+            isFeasible = True
+            for i in range(len(possible_neighbors)):
+                if bitset & (1<<i):
+                    if neighbors[possible_neighbors[i]] == 0: 
+                        isFeasible = False
+                        probability = 0
+                    else:
+                        probability *= neighbors[possible_neighbors[i]]
+                else:
+                    new_state.append(possible_neighbors[i])
+                    if neighbors[possible_neighbors[i]] == 1: 
+                        isFeasible = False
+                        probability = 0
+                    else:
+                        probability *= (1 - neighbors[possible_neighbors[i]])
+
+            probability = round(probability, 3)
+            new_state.sort()
+            state_answer = StateAnswer(new_state, isFeasible, probability)
+            statesList.append(state_answer)
+        
+        return statesList

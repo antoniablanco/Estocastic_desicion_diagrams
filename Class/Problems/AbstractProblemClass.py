@@ -11,7 +11,7 @@ class AbstractProblem(ABC):
     en initial_state.
     '''
 
-    def __init__(self, initial_state, variables, values):
+    def __init__(self, initial_state, variables):
         '''
         Constructor de la clase AbstractProblem.
 
@@ -30,7 +30,6 @@ class AbstractProblem(ABC):
         self.initial_state = initial_state
         self.ordered_variables = self._get_variables(variables)
         self.variables_domain = dict(variables)
-        self.values = values
     
     def _get_variables(self, variablesAndDomain):
         ''' 
@@ -71,18 +70,3 @@ class AbstractProblem(ABC):
         isFeasible, que es True si el estado es factible, y False en caso contrario.
         '''
         raise NotImplementedError("The method transition_function has not been implemented yet")
-
-    @abstractmethod
-    def _probabilistic_function(self, variable_id, variable_value):
-        '''
-        Método abstracto que debe ser implementado por las subclases para definir la función probabilistica.
-
-        Parámetros:
-        variable_id: El identificador de la variable que se modifica, sigue el mismo type que el entregado en 
-        variables.
-        variable_value: El valor de la variable que se modifica, es el valor posible de su dominio que se selecciono.
-
-        Retorna:
-        dict: Un diccionario que mapea los valores posibles de la variable a su probabilidad.
-        '''
-        raise NotImplementedError("The method _probabilistic_function has not been implemented yet")
