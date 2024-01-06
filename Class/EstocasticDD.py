@@ -6,6 +6,7 @@ from Class.EstocasticDDStructure.Node import Node
 from Class.EstocasticDDStructure.Arc import Arc
 from Class.EstocasticDDStructure.Graph import Graph
 from Class.Problems.AbstractProblemClass import AbstractProblem
+from Class.Algorithms.PathProbability import PathProbability
 import copy
 import time
 
@@ -94,6 +95,19 @@ class EstocasticDD():
         ''' Retorna una copia del objeto de la clase Graph, que no posee un
         puntero al mismo objeto. '''
         return copy.deepcopy(self.graph_DD)
+    
+    def get_path_probability(self, path: list) -> float:
+        '''
+        Retorna la probabilidad de ocurrencia de un camino.
+
+        Parámetros:
+        path (list): Lista de nodos que conforman el camino.
+
+        Retorna:
+        float: La probabilidad de ocurrencia del camino.
+        '''
+        path_probability = PathProbability(self.graph_DD, path)
+        return path_probability.get_path_probability()
     
     def get_estocastic_dd_time(self) -> float:
         ''' Retorna el tiempo de ejecución del EstocasticDDBuilder. '''
