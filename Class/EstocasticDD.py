@@ -1,4 +1,5 @@
 from Class.EstocasticDDBuilder.EstocasticDDBuilder import EstocasticDDBuilder
+from Class.ReduceEstocasticDDBuilder.ReduceEstocasticDDBuilder import ReduceDDBuilder
 from Class.GraphVisualization.Print import Print
 from Class.GraphVisualization.GraphFile import GraphFile
 from Class.EstocasticDDStructure.Node import Node
@@ -24,6 +25,7 @@ class EstocasticDD():
         - graph_DD: El diagrama de decisión creado, que se actualiza al generar el diagrama reducido o relajado.
         '''
         self.estocastic_dd_builder_time = 0
+        self.reduce_estocastic_dd_builder_time = 0
 
         self.problem = problem
         self.graph_DD = self._create_estocastic_decision_diagram(verbose)
@@ -45,6 +47,24 @@ class EstocasticDD():
 
         print(f"Diagrama de decision estocastico creado")
         return graph
+    
+    def reduce_estocastic_decision_diagram(self, verbose: bool) -> Graph:
+        '''
+        Método privado que crea el diagrama de decisión estocastico reducido.
+
+        Parámetros:
+        verbose (bool): Si es True, se imprime la construcción del grafo.
+        '''
+        print("")
+        print("Iniciando la reducción del diagrama de decision estocastico...")
+        start_time = time.time()  
+        self.reduce_estocastic_dd_builder = ReduceDDBuilder(self.graph_DD)
+        self.graph_DD = self.reduce_estocastic_dd_builder.get_reduce_decision_diagram(verbose)
+        end_time = time.time()  
+        self.reduce_estocastic_dd_builder_time = end_time - start_time
+
+        print(f"Diagrama de decision estocastico reducido")
+
     
     def print_decision_diagram(self) -> None:
         '''
@@ -75,6 +95,10 @@ class EstocasticDD():
         puntero al mismo objeto. '''
         return copy.deepcopy(self.graph_DD)
     
-    def get_estocasticDDBuilder_time(self) -> float:
+    def get_estocastic_dd_time(self) -> float:
         ''' Retorna el tiempo de ejecución del EstocasticDDBuilder. '''
         return self.estocastic_dd_builder_time
+    
+    def get_reduce_estocastic_dd_time(self) -> float:
+        ''' Retorna el tiempo de ejecución del EstocasticDDBuilder. '''
+        return self.reduce_estocastic_dd_builder_time

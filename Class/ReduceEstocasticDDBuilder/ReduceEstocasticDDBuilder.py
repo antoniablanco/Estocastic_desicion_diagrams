@@ -30,11 +30,12 @@ class ReduceDDBuilder():
         - Graph: El grafo de decisión reducido.
         '''
         for layer in reversed(self._graph.structure[:-1]):
-            self._print_graph(should_visualize)
             self._layerWorking -= 1 
+            self._print_graph(should_visualize)
+            self._merge_same_node_arcs(layer)
             self._reviewing_layer(layer)
 
-        self._final_layer_set_up()
+        self._update_node_names()
         self._print_graph(should_visualize)
                 
         return self._graph
@@ -61,8 +62,56 @@ class ReduceDDBuilder():
                 print(str(node) + "(" + in_arcs_str + ")", end=" ")
             print("")
     
-    ### agregar que une los arcos que van entre los mismos nodos con igual valor de la variable
-    ### pero con distinta probabilidad
+    def _merge_same_node_arcs(self, layer):
+        '''
+        Revisa para la capa actual si hay arcos similares que deban fusionarse.
+
+        Parámetros:
+        - layer: Lista de nodos en la capa actual.
+        '''
+        for node in layer:
+            for i, arc_one in enumerate(node.out_arcs):
+                arcs = node.out_arcs[i+1:]
+                while len(arcs) > 0:
+                    arc_two = arcs.pop(0)
+                    if self._checking_if_two_arcs_should_merge(arc_one, arc_two):
+                        self._merge_similar_arcs(arc_one, arc_two)
+    
+    def _checking_if_two_arcs_should_merge(self, arc_one, arc_two):
+        '''
+        Verifica si dos arcos deberían fusionarse.
+
+        Parámetros:
+        - arc_one: Primer arco a comparar.
+        - arc_two: Segundo arco a comparar.
+
+        Retorna:
+        bool: True si los arcos deben fusionarse, False en caso contrario.
+        '''
+        return arc_one.in_node == arc_two.in_node and arc_one.variable_value == arc_two.variable_value
+
+    def _merge_similar_arcs(self, remove_arc, keep_arc):
+        '''
+        Fusiona dos arcos.
+
+        Parámetros:
+        - remove_arc: Primer arco a fusionar.
+        - keep_arc: Segundo arco a fusionar.
+        '''
+        keep_arc.probability += remove_arc.probability
+        self._delete_arc(remove_arc)
+    
+    def _delete_arc(self, arc_to_remove):
+        '''
+        Elimina un arco.
+
+        Parámetros:
+        - arc_to_remove: Arco a eliminar.
+        '''
+        arc_to_remove.out_node.out_arcs.remove(arc_to_remove)
+        arc_to_remove.in_node.in_arcs.remove(arc_to_remove)
+        del arc_to_remove 
+
     def _reviewing_layer(self, layer):
         '''
         Revisa la capa actual para fusionar nodos que cumplen con llegar al mismo nodo posteriormente
@@ -94,7 +143,6 @@ class ReduceDDBuilder():
         PathsOfNodeTwo = self._get_node_of_every_type_of_path(node_two)
         return PathsOfNodeOne == PathsOfNodeTwo
 
-    ### VERIFICAR QUE COMPARA BIEN
     def _get_node_of_every_type_of_path(self, node):
         '''
         Obtiene los nodos del camino de un nodo.
@@ -166,9 +214,7 @@ class ReduceDDBuilder():
         - changin_nodes_ordered: Lista que contiene nodos en el orden deseado.
         '''
         for arc in node_to_remove.out_arcs:
-            node_to_remove.out_arcs.remove(arc)
-            arc.in_node.in_arcs.remove(arc)
-            del arc                
+            self._delete_arc(arc)                  
     
     def _delete_node(self, node_to_remove):
         '''
@@ -179,12 +225,6 @@ class ReduceDDBuilder():
         '''
         self._graph.remove_node(node_to_remove)
         del node_to_remove
-    
-    def _final_layer_set_up(self):
-        '''
-        Configura la última capa del grafo después de la reducción.
-        '''
-        self._update_node_names()
 
     def _update_node_names(self):
         '''

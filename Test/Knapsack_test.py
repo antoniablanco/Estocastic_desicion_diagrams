@@ -14,6 +14,7 @@ from Class.EstocasticDD import EstocasticDD
 from Class.AnswerEDD.StateAnswer import StateAnswer
 import dd_controller_generator.EstocasticDDKnapsack as EstocasticDDKnapsack
 import dd_controller_generator.EstocasticDDKnapsack2 as EstocasticDDKnapsack2
+import dd_controller_generator.ReduceDDKnapsack as ReduceDDKnapsack
 
 @contextmanager
 def assertNoRaise():
@@ -56,10 +57,10 @@ class ProblemKnapsackTest(unittest.TestCase):
         matrix_of_wheight = [3, 3, 4, 6]
         right_side_of_restrictions = 5
         values = {
-            0 : {'x_1': {0:1},
-                 'x_2': {0:1},
-                 'x_3': {0:1},
-                 'x_4': {0:1}},
+            0 : {'x_1': {0:1.0},
+                 'x_2': {0:1.0},
+                 'x_3': {0:1.0},
+                 'x_4': {0:1.0}},
 
             1 : {'x_1': {1: 0.5, 2: 0.5},
                  'x_2': {2: 0.3, 3: 0.7},
@@ -96,6 +97,19 @@ class ProblemKnapsackTest(unittest.TestCase):
 
         self.assertEqual(actual_output.strip(), expected_output.strip())
     
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_verbose_create_reduce_dd(self, mock_stdout):
+        self.dd_instance.reduce_estocastic_decision_diagram(verbose=True)
+
+        file_path = os.path.join('Test', 'test_prints', 'createReduceDDKnapsack.txt')
+        
+        with open(file_path, "r") as file:
+            expected_output = file.read()
+
+        actual_output = mock_stdout.getvalue()
+
+        self.assertEqual(actual_output.strip(), expected_output.strip())
+    
     def test_create_dd_graph_equal(self):
         resultado1 = self.dd_instance.graph_DD == EstocasticDDKnapsack.graph
         resultado2 = self.dd_instance.graph_DD == EstocasticDDKnapsack2.graph
@@ -103,8 +117,17 @@ class ProblemKnapsackTest(unittest.TestCase):
         self.assertTrue(resultado1)
         self.assertTrue(resultado2)
     
+    def test_create_reduce_dd_graph_equal(self):
+        self.dd_instance.reduce_estocastic_decision_diagram(verbose=False)
+        resultado = self.dd_instance.graph_DD == ReduceDDKnapsack.graph
+
+        self.assertTrue(resultado)
+    
     def test_get_dd_graph(self):
         self.assertIsNotNone(self.dd_instance.get_decision_diagram_graph())
+    
+    def test_get_copy(self):
+        self.assertIsNot(self.dd_instance.graph_DD, self.dd_instance.get_decision_diagram_graph_copy)
     
     @patch('matplotlib.pyplot.show')
     def test_print_dd_graph(self, mock_show):
@@ -113,20 +136,46 @@ class ProblemKnapsackTest(unittest.TestCase):
         with assertNoRaise():
             dd_instance.print_decision_diagram()
             mock_show.assert_called_once()
-        
-    def test_get_copy(self):
-        dd_instance = EstocasticDD(self.problem_instance, verbose=False)
-        self.assertIsNot(dd_instance.graph_DD, dd_instance.get_decision_diagram_graph_copy)
-
-    def test_get_DDBuilder_time(self):
-        dd_instance = EstocasticDD(self.problem_instance, verbose=False)
-        self.assertTrue(dd_instance.get_estocasticDDBuilder_time()>0)
     
-    def test_check_gml_file_content(self):
+    @patch('matplotlib.pyplot.show')
+    def test_print_reduce_dd_graph(self, mock_show):
+        self.dd_instance.reduce_estocastic_decision_diagram(verbose=False)
+
+        with assertNoRaise():
+            self.dd_instance.print_decision_diagram()
+            mock_show.assert_called_once()
+
+    def test_get_dd_builder_time(self):
         dd_instance = EstocasticDD(self.problem_instance, verbose=False)
-        dd_instance.export_graph_file('estocastic_test')
+        self.assertTrue(dd_instance.get_estocastic_dd_time()>0)
+    
+    def test_get_reduce_dd_builder_time(self):
+        self.dd_instance.reduce_estocastic_decision_diagram(verbose=False)
+        time = self.dd_instance.get_reduce_estocastic_dd_time()
+        self.assertTrue(time>0)
+    
+    def test_check_gml_estocastic_dd(self):
+        self.dd_instance.export_graph_file('estocastic_test')
 
         expected_file_path = os.path.join('Test', 'gml_files', 'EstocasticKnapsackTest.gml')
+        actual_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'estocastic_test.gml'))
+
+        self.assertTrue(os.path.exists(actual_file_path))
+        self.assertTrue(os.path.exists(expected_file_path))
+
+        with open(expected_file_path, "r") as file:
+            expected_output = file.read()
+        
+        with open(actual_file_path, "r") as file:
+            actual_output = file.read()
+        
+        self.assertEqual(actual_output.strip(), expected_output.strip())
+    
+    def test_check_gml_reduce_estocastic_dd(self):
+        self.dd_instance.reduce_estocastic_decision_diagram(verbose=False)
+        self.dd_instance.export_graph_file('estocastic_test')
+
+        expected_file_path = os.path.join('Test', 'gml_files', 'ReduceKnapsackTest.gml')
         actual_file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'estocastic_test.gml'))
 
         self.assertTrue(os.path.exists(actual_file_path))

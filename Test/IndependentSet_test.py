@@ -143,9 +143,9 @@ class ProblemIndependentSetTest(unittest.TestCase):
         dd_instance = EstocasticDD(self.problem_instance, verbose=False)
         self.assertIsNot(dd_instance.graph_DD, dd_instance.get_decision_diagram_graph_copy)
 
-    def test_get_DDBuilder_time(self):
+    def test_get_dd_builder_time(self):
         dd_instance = EstocasticDD(self.problem_instance, verbose=False)
-        self.assertTrue(dd_instance.get_estocasticDDBuilder_time()>0)
+        self.assertTrue(dd_instance.get_estocastic_dd_time()>0)
     
     def test_check_gml_file_content(self):
         dd_instance = EstocasticDD(self.problem_instance, verbose=False)

@@ -54,5 +54,11 @@ class ProblemKnapsack(AbstractProblem):
 
         return statesList
     
+    def merge_operator(self, state_one, state_two):
+        state = []
+        for i in range(len(state_one)):
+            state.append([state_one[i][0], state_two[i][1]])
+        return state
+
     def _probabilistic_function(self, variable_id, variable_value):
         return self.values[int(variable_value)][variable_id]
