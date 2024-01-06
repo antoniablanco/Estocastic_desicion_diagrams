@@ -168,7 +168,6 @@ class ReduceDDBuilder():
         - node_two: Segundo nodo a fusionar.
         '''
         node_to_remove, node_to_keep = list(self._get_order_of_changin_nodes(node_one, node_two))
-        
         self._redirect_in_arcs(node_to_remove, node_to_keep)
         self._delete_out_arcs(node_to_remove)
         self._delete_node(node_to_remove)
@@ -201,7 +200,7 @@ class ReduceDDBuilder():
         Parámetros:
         - changin_nodes_ordered: Lista que contiene nodos en el orden deseado.
         '''
-        for arc in node_to_remove.in_arcs:
+        for arc in node_to_remove.in_arcs.copy():
             arc.in_node = node_to_keep
             if arc not in node_to_keep.in_arcs:
                 node_to_keep.add_in_arc(arc)
@@ -213,7 +212,7 @@ class ReduceDDBuilder():
         Parámetros:
         - changin_nodes_ordered: Lista que contiene nodos en el orden deseado.
         '''
-        for arc in node_to_remove.out_arcs:
+        for arc in node_to_remove.out_arcs.copy():
             self._delete_arc(arc)                  
     
     def _delete_node(self, node_to_remove):

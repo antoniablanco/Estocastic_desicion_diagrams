@@ -60,14 +60,6 @@ class Graph():
                     there_is_equal_arc = True
             devolver_in_arcs = devolver_in_arcs and there_is_equal_arc
         
-        if not devolver_in_arcs:
-            print()
-            print('No hay arcos de entrada iguales para los nodos: ', node1, ' y ', node2)
-            for arc1 in node1.in_arcs:
-                print("arc1: ",arc1.variable_value, " ", arc1.out_node," ", arc1.probability)
-            for arc2 in node2.in_arcs:
-                print("arc2: ",arc2.variable_value, " ",arc2.out_node, " ",arc2.probability)
-        
         devolver_out_arcs = True
         for arc1 in node1.out_arcs:
             there_is_equal_arc = False

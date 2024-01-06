@@ -39,5 +39,7 @@ dd_instance.print_decision_diagram()
 dd_instance.reduce_estocastic_decision_diagram(verbose=False)
 dd_instance.print_decision_diagram()
 
+graph = dd_instance.get_decision_diagram_graph()
+     
 dd_instance.export_graph_file("estocastic_file")
 
