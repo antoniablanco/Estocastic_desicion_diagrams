@@ -101,22 +101,28 @@ class EstocasticDD():
         Retorna la probabilidad de ocurrencia de un camino.
 
         Parámetros:
-        path (list): Lista de nodos que conforman el camino.
+        path (dict): Diccionar con los id de las variables como llaves y 
+                     los valores de las variables como valores.
 
         Retorna:
         float: La probabilidad de ocurrencia del camino.
         '''
+
+        start_time = time.time()  
         path_probability = PathProbability(self.graph_DD, path)
         probability = path_probability.get_path_probability()
+        end_time = time.time()  
+        path_probability_time = end_time - start_time
+
         print()
-        print(f'La probabilidad de ocurrencia del camino {path} es: {probability}')
+        print(f'La probabilidad de ocurrencia del camino {path} es: {probability} y se demoro {round(path_probability_time, 5)} segundos')
 
         return probability
     
     def get_estocastic_dd_time(self) -> float:
-        ''' Retorna el tiempo de ejecución del EstocasticDDBuilder. '''
+        ''' Retorna el tiempo de ejecución de create_estocastic_decision_diagram. '''
         return self.estocastic_dd_builder_time
     
     def get_reduce_estocastic_dd_time(self) -> float:
-        ''' Retorna el tiempo de ejecución del EstocasticDDBuilder. '''
+        ''' Retorna el tiempo de ejecución de reduce_estocastic_decision_diagram. '''
         return self.reduce_estocastic_dd_builder_time
