@@ -26,4 +26,8 @@ dd_instance.print_decision_diagram()
 dd_instance.reduce_estocastic_decision_diagram(verbose=False)
 dd_instance.print_decision_diagram()
 
+# Algoritmos
+path = {'x_1': 1, 'x_2': 0, 'x_3': 0, 'x_4': 1, 'x_5': 1}
+dd_instance.get_path_probability(path)
+
 dd_instance.export_graph_file("estocastic_file")

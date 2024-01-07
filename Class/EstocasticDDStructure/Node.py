@@ -16,6 +16,8 @@ class Node():
         self.in_arcs = []
         self.out_arcs = []
 
+        self.weight = 0
+
     
     def __str__(self):
         '''

@@ -96,7 +96,7 @@ class EstocasticDD():
         puntero al mismo objeto. '''
         return copy.deepcopy(self.graph_DD)
     
-    def get_path_probability(self, path: list) -> float:
+    def get_path_probability(self, path: dict) -> float:
         '''
         Retorna la probabilidad de ocurrencia de un camino.
 
@@ -107,7 +107,11 @@ class EstocasticDD():
         float: La probabilidad de ocurrencia del camino.
         '''
         path_probability = PathProbability(self.graph_DD, path)
-        return path_probability.get_path_probability()
+        probability = path_probability.get_path_probability()
+        print()
+        print(f'La probabilidad de ocurrencia del camino {path} es: {probability}')
+
+        return probability
     
     def get_estocastic_dd_time(self) -> float:
         ''' Retorna el tiempo de ejecución del EstocasticDDBuilder. '''

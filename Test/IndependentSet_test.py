@@ -211,3 +211,10 @@ class ProblemIndependentSetTest(unittest.TestCase):
             actual_output = file.read()
         
         self.assertEqual(actual_output.strip(), expected_output.strip())
+
+    def test_get_correct_path_probability(self):
+
+        self.assertEqual(self.dd_instance.get_path_probability({'x_1': 0, 'x_2': 1, 'x_3': 1, 'x_4': 0, 'x_5': 0}), 0.1)
+        self.assertEqual(self.dd_instance.get_path_probability({'x_1': 1, 'x_2': 0, 'x_3': 0, 'x_4': 1, 'x_5': 1}), 0.9)
+        self.assertEqual(self.dd_instance.get_path_probability({'x_1': 0, 'x_2': 0, 'x_3': 0, 'x_4': 0, 'x_5': 0}), 1)
+        self.assertEqual(self.dd_instance.get_path_probability({'x_1': 1, 'x_2': 1, 'x_3': 1, 'x_4': 1, 'x_5': 1}), 0)
