@@ -20,25 +20,20 @@ class PathProbability():
 
     def get_path_probability(self) -> float:
         '''
-        Entregra la probabilidad de ocurrencia del camino entregado.
+        Entregra la probabilidad de que un camino sea factible.
         '''
-        self._clean_previous_weight()
 
-        for layer in self._graph.structure[1:]:
-            for node in layer:
-                node.weight = 0
-                for arc in node.in_arcs:
-                    if self._path[arc.variable_id] == arc.variable_value:
-                        node.weight += arc.probability * arc.out_node.weight
-                node.weight = round(node.weight, 3)
+        nodes_probability = [-1 for i in range(len(self._graph.nodes))]
+        nodes_probability[0] = 1
 
-        return self._graph.structure[-1][-1].weight
-    
-    def _clean_previous_weight(self):
-        '''
-        Método privado que limpia los pesos anteriores de los nodos.
-        '''
-        for node in self._graph.nodes:
-            node.weight = 0
+        for node in self._graph.nodes[1:]:
+            id_node = int(node.id_node)
+            nodes_probability[id_node] = 0
+            
+            for arc in node.in_arcs:
+                if self._path[arc.variable_id] == arc.variable_value:
+                    nodes_probability[id_node] += arc.probability * nodes_probability[int(arc.out_node.id_node)]
+                nodes_probability[id_node] = round(nodes_probability[id_node], 3)
 
-        self._graph.nodes[0].weight = 1
+        return nodes_probability[-1]
+

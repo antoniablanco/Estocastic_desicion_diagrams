@@ -28,6 +28,7 @@ class ProblemKnapsack(AbstractProblem):
     def check_atributes(self, variables, initial_state):
         self.check_same_len_matrix_and_right_side(initial_state)
         self.check_same_len_rows_matrix_and_variables(variables)
+        self.check_probabilities_sum_one()
     
     def check_same_len_matrix_and_right_side(self, initial_state):
         assert len(self.list_of_wheight_for_restrictions) == len(self.right_side_of_restrictions), "matrix_of_wheight and right_side_of_restrictions must have the same length"
@@ -37,6 +38,11 @@ class ProblemKnapsack(AbstractProblem):
         for row in range(len(self.list_of_wheight_for_restrictions)):
             assert len(self.list_of_wheight_for_restrictions[row]) == len(variables), "rows of matrix_of_wheight and right_side_of_restrictions must have the same length of variables"
 
+    def check_probabilities_sum_one(self):
+        for variable in self.values.keys():
+            for variable_value in self.values[variable].keys():
+                assert sum(self.values[variable][variable_value].values()) == 1, "probabilities must sum 1"
+    
     def equals(self, state_one, state_two):
         return state_one == state_two
 

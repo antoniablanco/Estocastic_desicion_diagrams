@@ -153,10 +153,9 @@ class ReduceDDBuilder():
         Retorna:
         dict: Un diccionario que contiene nodos del camino como claves y valores de las variables como valores.
         '''
-        
-        NodesOfPath = {}
+        NodesOfPath = []
         for arc in node.out_arcs:
-            NodesOfPath[arc.in_node] = [arc.variable_value, arc.probability]
+            NodesOfPath.append(str(arc.in_node)+"_"+str(arc.variable_value)+"_"+str(arc.probability))
         return NodesOfPath
 
     def _merge_nodes(self, node_one, node_two):
