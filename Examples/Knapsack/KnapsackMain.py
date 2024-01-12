@@ -11,7 +11,6 @@ sys.path.append(root_dir)
 
 from Class.EstocasticDD import EstocasticDD 
 from KnapsackProblem import ProblemKnapsack
-from Exceptions.MyExceptions import SameLenError
 
 # Valores construcción knapsack
 matrix_of_wheight = [[3, 3, 4, 6]]
