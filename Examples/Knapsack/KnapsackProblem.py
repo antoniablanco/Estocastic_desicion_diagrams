@@ -28,6 +28,7 @@ class ProblemKnapsack(AbstractProblem):
     def check_atributes(self, variables, initial_state):
         self.check_same_len_matrix_and_right_side(initial_state)
         self.check_same_len_rows_matrix_and_variables(variables)
+        self.check_probabilities_sum_one()
     
     def check_same_len_matrix_and_right_side(self, initial_state):
         assert len(self.list_of_wheight_for_restrictions) == len(self.right_side_of_restrictions), "matrix_of_wheight and right_side_of_restrictions must have the same length"
@@ -37,6 +38,11 @@ class ProblemKnapsack(AbstractProblem):
         for row in range(len(self.list_of_wheight_for_restrictions)):
             assert len(self.list_of_wheight_for_restrictions[row]) == len(variables), "rows of matrix_of_wheight and right_side_of_restrictions must have the same length of variables"
 
+    def check_probabilities_sum_one(self):
+        for variable in self.values.keys():
+            for variable_value in self.values[variable].keys():
+                assert sum(self.values[variable][variable_value].values()) == 1, "probabilities must sum 1"
+    
     def equals(self, state_one, state_two):
         return state_one == state_two
 
@@ -54,5 +60,11 @@ class ProblemKnapsack(AbstractProblem):
 
         return statesList
     
+    def merge_operator(self, state_one, state_two):
+        state = []
+        for i in range(len(state_one)):
+            state.append([state_one[i][0], state_two[i][1]])
+        return state
+
     def _probabilistic_function(self, variable_id, variable_value):
         return self.values[int(variable_value)][variable_id]

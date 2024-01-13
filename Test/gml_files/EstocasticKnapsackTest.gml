@@ -276,7 +276,7 @@ graph [
 edge [
 	source 0
 	target 1
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -306,7 +306,7 @@ edge [
 edge [
 	source 1
 	target 4
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -336,7 +336,7 @@ edge [
 edge [
 	source 2
 	target 7
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -366,7 +366,7 @@ edge [
 edge [
 	source 3
 	target 5
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -396,7 +396,7 @@ edge [
 edge [
 	source 4
 	target 10
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -426,7 +426,7 @@ edge [
 edge [
 	source 5
 	target 13
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -446,7 +446,7 @@ edge [
 edge [
 	source 6
 	target 14
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -466,7 +466,7 @@ edge [
 edge [
 	source 7
 	target 11
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -496,7 +496,7 @@ edge [
 edge [
 	source 8
 	target 12
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -516,7 +516,7 @@ edge [
 edge [
 	source 9
 	target 15
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -526,7 +526,7 @@ edge [
 edge [
 	source 10
 	target 16
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -556,7 +556,7 @@ edge [
 edge [
 	source 11
 	target 16
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -586,7 +586,7 @@ edge [
 edge [
 	source 12
 	target 16
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -596,7 +596,7 @@ edge [
 edge [
 	source 13
 	target 16
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -616,7 +616,7 @@ edge [
 edge [
 	source 14
 	target 16
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 
@@ -626,7 +626,7 @@ edge [
 edge [
 	source 15
 	target 16
-	label "1"
+	label "1.0"
 	graphics
 	[
 	fill "#808080" 		targetArrow "standard"	 style	"dashed"	 

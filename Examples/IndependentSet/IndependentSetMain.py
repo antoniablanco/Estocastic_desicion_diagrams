@@ -20,8 +20,14 @@ initial_state = [1, 2, 3, 4, 5]
 variables = [('x_1', [0, 1]), ('x_2', [0, 1]), ('x_3', [0, 1]), ('x_4', [0, 1]), ('x_5', [0, 1])]
 
 problem_instance = ProblemIndependentSet(initial_state, variables, DictVecinos)
+dd_instance = EstocasticDD(problem_instance, verbose=False)
 
-dd_instance = EstocasticDD(problem_instance, verbose=True)
 dd_instance.print_decision_diagram()
+dd_instance.reduce_estocastic_decision_diagram(verbose=False)
+dd_instance.print_decision_diagram()
+
+# Algoritmos
+path = {'x_1': 1, 'x_2': 0, 'x_3': 0, 'x_4': 1, 'x_5': 1}
+dd_instance.get_path_probability(path)
 
 dd_instance.export_graph_file("estocastic_file")
