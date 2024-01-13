@@ -19,9 +19,9 @@ class SetCoveringProblem(AbstractProblem):
 
         self.matrix_of_wheight = matrix_of_wheight
         self.right_side_of_restrictions = right_side_of_restrictions
+        self.max_positions = self.get_max_positions()
 
         self.check_atributes(variables, initial_state)
-        self.max_positions = self.get_max_positions()
     
     def get_max_positions(self):
         max_positions = [-1, -1, -1]
@@ -64,7 +64,7 @@ class SetCoveringProblem(AbstractProblem):
             for row in previous_state: 
                 if int(variable_id[2:]) >= self.max_positions[row-1]:
                     isFeasible = False 
-            statesList.append(StateAnswer(new_state, isFeasible, 1))
+            statesList.append(StateAnswer(new_state, isFeasible, 1.0))
 
         else:
             statesList = self._get_list_states_with_probabilities(previous_state, variable_id)
@@ -78,7 +78,7 @@ class SetCoveringProblem(AbstractProblem):
         static = [i for i in previous_state if self.matrix_of_wheight[i-1][variable_position] == 0]
 
         for bitset in range(1<<len(dinamic)):
-            probability = 1
+            probability = 1.0
             isFeasible = True
             new_state = static.copy()
 

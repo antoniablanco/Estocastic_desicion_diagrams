@@ -28,14 +28,13 @@ problem_instance = SetCoveringProblem(initial_state, variables, matrix_of_wheigh
 dd_instance = EstocasticDD(problem_instance, verbose=False)
 
 dd_instance.print_decision_diagram()
-dd_instance.reduce_estocastic_decision_diagram(verbose=False)
+dd_instance.reduce_estocastic_decision_diagram(verbose=True)
 dd_instance.print_decision_diagram()
 
 graph = dd_instance.get_decision_diagram_graph()
-
+dd_instance.export_graph_file("estocastic_file")
 
 # Algoritmos
-path = {'x_1': 0, 'x_2': 0, 'x_3': 0, 'x_4': 1, 'x_5':1}
+path = {'x_1': 0, 'x_2': 0, 'x_3': 1, 'x_4': 1, 'x_5': 1}
 dd_instance.get_path_probability(path)
      
-dd_instance.export_graph_file("estocastic_file")
