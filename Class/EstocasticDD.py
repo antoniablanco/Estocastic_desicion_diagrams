@@ -107,6 +107,8 @@ class EstocasticDD():
         Retorna:
         float: La probabilidad de ocurrencia del camino.
         '''
+        
+        self.check_path(path)
 
         start_time = time.time()  
         path_probability = PathProbability(self.graph_DD, path)
@@ -119,6 +121,23 @@ class EstocasticDD():
 
         return probability
     
+    def check_path(self, path: dict) -> None:
+        '''
+        Verifica que el camino sea válido.
+
+        Parámetros:
+        path (dict): Diccionar con los id de las variables como llaves y 
+                     los valores de las variables como valores.
+
+        Retorna:
+        None
+        '''
+        for key in path.keys():
+            if key not in self.problem.ordered_variables:
+                raise Exception(f'La variable {key} no se encuentra entre las variables del diagrama de decision')
+            if path[key] not in self.problem.variables_domain[key]:
+                raise Exception(f'El valor {path[key]} no se encuentra en el dominio de la variable {key}')
+
     def get_estocastic_dd_time(self) -> float:
         ''' Retorna el tiempo de ejecución de create_estocastic_decision_diagram. '''
         return self.estocastic_dd_builder_time
