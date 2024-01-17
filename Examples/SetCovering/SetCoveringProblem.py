@@ -77,6 +77,7 @@ class SetCoveringProblem(AbstractProblem):
         dinamic = [i for i in previous_state if self.matrix_of_wheight[i-1][variable_position] < 1 and self.matrix_of_wheight[i-1][variable_position] > 0]
         static = [i for i in previous_state if self.matrix_of_wheight[i-1][variable_position] == 0]
 
+        # Se utiliza la representación binaria de los estados dinámicos para calcular la probabilidad de cada estado
         for bitset in range(1<<len(dinamic)):
             probability = 1.0
             isFeasible = True

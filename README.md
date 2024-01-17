@@ -77,7 +77,7 @@ This example represents a generalization of the set covering problem, allowing f
 
 ## Test Casses
 
-bla bla bla
+Test cases have been created for the three examples explained earlier. These test all the implemented features and can be used to verify that different changes implemented continue to provide correct responses.
 
 ## Extending the Code
 
