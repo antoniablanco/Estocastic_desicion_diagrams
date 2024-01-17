@@ -28,7 +28,7 @@ problem_instance = SetCoveringProblem(initial_state, variables, matrix_of_wheigh
 dd_instance = EstocasticDD(problem_instance, verbose=False)
 
 dd_instance.print_decision_diagram()
-dd_instance.reduce_estocastic_decision_diagram(verbose=True)
+dd_instance.reduce_estocastic_decision_diagram(verbose=False)
 dd_instance.print_decision_diagram()
 
 graph = dd_instance.get_decision_diagram_graph()
